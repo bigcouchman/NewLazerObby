@@ -1526,6 +1526,7 @@ GameObject:
   - component: {fileID: 1777689749}
   - component: {fileID: 1777689748}
   - component: {fileID: 1777689754}
+  - component: {fileID: 1777689755}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1690,6 +1691,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a854a22c8fed81c448d01cd693ed78d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1777689755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777689747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ba20881257bfb45a510ad7aa6eb7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameRespawn
+  threshold: -10
 --- !u!1 &1797523054
 GameObject:
   m_ObjectHideFlags: 0
