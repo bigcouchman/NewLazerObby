@@ -22,13 +22,23 @@ public class NewLaserScript : MonoBehaviour
         if(Physics.Raycast(startPoint.position, startPoint.forward, out hit)){
             if(hit.collider){
                 lr.SetPosition(1, hit.point);
-                 Debug.Log("Laser hit: " + hit.collider.name);
             }
             if(hit.transform.tag == "Player"){
-                Destroy(hit.transform.gameObject);
+                hit.transform.position = new Vector3(0f, 5.926f, 0f);
+                Vector3 respawnPoint = new Vector3(0f, 5.926f, 0f);
+                CharacterController control = hit.transform.GetComponent<CharacterController>();
+                if (control != null){
+                    control.enabled = false;
+                    hit.transform.position = respawnPoint;
+                    control.enabled = true;
+                }
+                else {
+                    hit.transform.position = respawnPoint;
+                }
             }
         }
-        else lr.SetPosition(1, startPoint.position + startPoint.forward * 5000);
-
+        else {
+            lr.SetPosition(1, startPoint.position + startPoint.forward * 5000);
+        }
     }
 }
