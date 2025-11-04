@@ -11,9 +11,19 @@ public class GameRespawn : MonoBehaviour
 
     void FixedUpdate()
     {
+        // this is where we will set checkpoint 
         if (transform.position.y < threshold)
         {
-            transform.position = new Vector3(0f, 5.926f, 0f);
+            if (CheckpointManager.Instance != null)
+            {
+                transform.position = CheckpointManager.Instance.GetRespawnPos();
+            }
+            else
+            {
+                transform.position = new Vector3(0f, 5.926f, 0f);
+                // debug whether checkpoint is saved or found
+                Debug.Log("CheckpointManager not founded!");
+            }
         }
     }
 }
