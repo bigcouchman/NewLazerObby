@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
  
-// These videos take long to make so I hope this helps you out and if you want to help me out you can by leaving a like and subscribe, thanks!
  
 public class Movement : MonoBehaviour
 {
@@ -11,10 +10,21 @@ public class Movement : MonoBehaviour
     [SerializeField] bool cursorLock = true;
     [SerializeField] float mouseSensitivity = 3.5f;
     [SerializeField] float Speed = 6.0f;
+    [SerializeField] float crouchSpeed = 3.0f;
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     [SerializeField] float gravity = -30f;
     [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask ground;  
+    [SerializeField] LayerMask ground; 
+
+    [SerializeField] private KeyCode crouchKey = KeyCode.C;
+    [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private float standingHeight = 2f;
+    [SerializeField] private float timeToCrouch = 0.25f;
+    [SerializeField] private Vector3 crouchingCenter = new Vector3(0,0.5f,0);
+    [SerializeField] private Vector3 standingCenter = new Vector3(0,0,0);
+    [SerializeField] private bool isCrouching = false;
+    [SerializeField] private bool duringCrouchAnimation = false;
+    [SerializeField] private bool canCrouch = true;
  
     public float jumpHeight = 6f;
     float velocityY;
@@ -28,6 +38,7 @@ public class Movement : MonoBehaviour
     Vector2 currentDir;
     Vector2 currentDirVelocity;
     Vector3 velocity;
+    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && controller.isGrounded;
  
     void Start()
     {
@@ -44,6 +55,8 @@ public class Movement : MonoBehaviour
     {
         UpdateMouse();
         UpdateMove();
+        if(canCrouch)
+            UpdateCrouch();
     }
  
     void UpdateMouse()
@@ -71,8 +84,11 @@ public class Movement : MonoBehaviour
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime);
  
         velocityY += gravity * 2f * Time.deltaTime;
- 
-        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * Speed + Vector3.up * velocityY;
+        Vector3 velocity;
+        if(isCrouching)
+            velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * crouchSpeed + Vector3.up * velocityY;
+        else 
+            velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * Speed + Vector3.up * velocityY;
  
         controller.Move(velocity * Time.deltaTime);
  
@@ -85,5 +101,42 @@ public class Movement : MonoBehaviour
         {
             velocityY = -8f;
         }
+    }
+
+    void UpdateCrouch()
+    {
+        if(ShouldCrouch)
+        {
+            StartCoroutine(CrouchStand());
+        }
+    }
+
+    private IEnumerator CrouchStand()
+    {
+        if(isCrouching && Physics.Raycast(playerCamera.transform.position,Vector3.up,1f))
+            yield break;
+        
+        duringCrouchAnimation = true;
+
+        float timeElapsed = 0;
+        float targetHeight = isCrouching ? standingHeight : crouchHeight;
+        float currentHeight = controller.height;
+        Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
+        Vector3 currentCenter = controller.center;
+
+        while(timeElapsed < timeToCrouch)
+        {
+            controller.height = Mathf.Lerp(currentHeight,targetHeight,timeElapsed/timeToCrouch);
+            controller.center = Vector3.Lerp(currentCenter,targetCenter,timeElapsed/timeToCrouch);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        controller.height = targetHeight;
+        controller.center = targetCenter;
+
+        isCrouching = !isCrouching;
+
+        duringCrouchAnimation = false;
     }
 }
