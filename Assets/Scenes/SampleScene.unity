@@ -11586,6 +11586,7 @@ GameObject:
   - component: {fileID: 1777689748}
   - component: {fileID: 1777689754}
   - component: {fileID: 1777689755}
+  - component: {fileID: 1777689756}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11610,12 +11611,22 @@ MonoBehaviour:
   cursorLock: 1
   mouseSensitivity: 2.8
   Speed: 9
+  crouchSpeed: 3
   moveSmoothTime: 0.125
   gravity: -30
   groundCheck: {fileID: 1133795248}
   ground:
     serializedVersion: 2
     m_Bits: 9
+  crouchKey: 99
+  crouchHeight: 0.5
+  standingHeight: 2
+  timeToCrouch: 0.25
+  crouchingCenter: {x: 0, y: 0.5, z: 0}
+  standingCenter: {x: 0, y: 0, z: 0}
+  isCrouching: 0
+  duringCrouchAnimation: 0
+  canCrouch: 1
   jumpHeight: 6
 --- !u!143 &1777689749
 CharacterController:
@@ -11763,7 +11774,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameRespawn
   threshold: -10
+<<<<<<< HEAD
 --- !u!1 &1837501903
+=======
+--- !u!114 &1777689756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777689747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205850a7d77694f68ae7bddcab7bc6f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!1 &1797523054
+>>>>>>> 022cbc7f6f16a7608c41172da01bdc5eb342ba62
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
