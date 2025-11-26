@@ -76,7 +76,7 @@ public class Movement : MonoBehaviour
  
     void UpdateMove()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, controller.height / 2 + 0.2f, ground);
  
         Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         targetDir.Normalize();
@@ -97,7 +97,7 @@ public class Movement : MonoBehaviour
             velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
  
-        if(isGrounded! && controller.velocity.y < -1f)
+        if(!isGrounded && controller.velocity.y < -1f)
         {
             velocityY = -8f;
         }

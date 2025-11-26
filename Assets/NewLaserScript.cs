@@ -24,8 +24,8 @@ public class NewLaserScript : MonoBehaviour
                 lr.SetPosition(1, hit.point);
             }
             if(hit.transform.tag == "Player"){
-                hit.transform.position = new Vector3(0f, 5.926f, 0f);
-                Vector3 respawnPoint = new Vector3(0f, 5.926f, 0f);
+                // hit.transform.position = new Vector3(0f, 5.926f, 0f);
+                Vector3 respawnPoint = CheckpointManager.Instance.GetRespawnPos();
                 CharacterController control = hit.transform.GetComponent<CharacterController>();
                 if (control != null){
                     control.enabled = false;
