@@ -7915,7 +7915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   timeText: {fileID: 1215666669}
-  remainTime: 90
+  remainTime: 300
   losePanel: {fileID: 780173226}
 --- !u!1 &1668980562
 GameObject:
