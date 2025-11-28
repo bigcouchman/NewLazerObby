@@ -6,7 +6,7 @@ using TMPro;
 public class TimeScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timeText;
-    [SerializeField] float remainTime;
+    [SerializeField] float remainTime = 300;
     [SerializeField] GameObject losePanel;
 
     bool checkLose = false;
@@ -36,5 +36,18 @@ public class TimeScript : MonoBehaviour
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+    public int numStars(){
+        float time = remainTime;
+        if (time > 240){
+            return 3;
+        }
+        if (time > 120){
+            return 2;
+        }
+        if (time > 0){
+            return 1;
+        }
+        return 0;
     }
 }
