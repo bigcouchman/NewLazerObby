@@ -11,8 +11,11 @@ public class FinishZone : MonoBehaviour
     public Image star3;
 
     private TimeScript timer;
+    public AudioClip finishSound;
+    private AudioSource audioSource;
     void Start(){
         timer = FindAnyObjectByType<TimeScript>();
+        audioSource = FindObjectOfType<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,6 +28,7 @@ public class FinishZone : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             if (winUI != null){
                 winUI.SetActive(true);
+                audioSource.PlayOneShot(finishSound);
 
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.None;

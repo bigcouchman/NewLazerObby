@@ -5347,6 +5347,7 @@ MonoBehaviour:
   star1: {fileID: 104514203}
   star2: {fileID: 1499016174}
   star3: {fileID: 1646080545}
+  finishSound: {fileID: 8300000, guid: 59fd4aa71d351774085d245a3e23f0a6, type: 3}
 --- !u!65 &920053681
 BoxCollider:
   m_ObjectHideFlags: 0

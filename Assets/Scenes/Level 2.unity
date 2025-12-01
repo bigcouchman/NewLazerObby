@@ -2335,6 +2335,7 @@ MonoBehaviour:
   star1: {fileID: 320105839}
   star2: {fileID: 285933961}
   star3: {fileID: 1002138271}
+  finishSound: {fileID: 8300000, guid: 59fd4aa71d351774085d245a3e23f0a6, type: 3}
 --- !u!65 &400423449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3032,6 +3033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd37003b7c64c48aed06acf2a99a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointPopup
+  checkpointSound: {fileID: 8300000, guid: 6baff80068848934087a2cabeafed2d7, type: 3}
   popup: {fileID: 1329621486}
   visibleTime: 2
 --- !u!1 &531649420
@@ -9966,6 +9968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd37003b7c64c48aed06acf2a99a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointPopup
+  checkpointSound: {fileID: 0}
   popup: {fileID: 1329621486}
   visibleTime: 2
 --- !u!114 &2145583165
